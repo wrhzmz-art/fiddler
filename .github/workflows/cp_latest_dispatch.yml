@@ -476,8 +476,16 @@ jobs:
 
       - name: Set user credentials
         run: |
-          $source_json = "FE/resources/app/out/file/identity.getfiddler.com/oauth/token.json"
-          $main_content = Get-Content -Path $source_json -Raw | ConvertFrom-Json
+          $source_json = Get-ChildItem -Path "FE" -Recurse -Filter "token.json" |
+            Where-Object { $_.FullName -match 'identity\.getfiddler\.com[\\/]+oauth[\\/]token\.json$' } |
+            Select-Object -First 1
+
+          if (-not $source_json) {
+            Write-Host "token.json not found, skipping user credential patch"
+            return
+          }
+
+          $main_content = Get-Content -Path $source_json.FullName -Raw | ConvertFrom-Json
 
           $main_content.user_info.email = $env:PATCH_USER_EMAIL
           $main_content.user_info.firstName = $env:PATCH_USER_FNAME
@@ -485,7 +493,7 @@ jobs:
           $main_content.user_info.country = $env:PATCH_USER_COUNTRYCODE
           $main_content.user_info.identities[0].providerName = $env:PATCH_USER_PROVIDER
 
-          $main_content | ConvertTo-Json -Depth 5 | Set-Content -Path $source_json
+          $main_content | ConvertTo-Json -Depth 5 | Set-Content -Path $source_json.FullName
 
       - name: Patch main.js to main.original.js
         run: |
