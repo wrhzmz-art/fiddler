@@ -9,7 +9,7 @@ Guides you to Patch Fiddler Everywhere on Windows Automatically.
 
 ## What and How?
 This's a  a patch for Telerik Fiddler Everywhere. It can grant you a trial that doesn't expire. The trial has all the features. 
-This's the guide for applying patch automatically. 
+This's the guide for applying patch automatically.  
 
 ![Unlimited Trial](https://github.com/user-attachments/assets/e9c83778-27fa-456a-96e6-07bb0cd7f4ad)
 
