@@ -502,7 +502,12 @@ jobs:
 
       - name: Patch main.js to main.original.js
         run: |
-          $source_main = "FE/resources/app/out/main.js"
+          $source_main = Join-Path $env:GITHUB_WORKSPACE "FE\resources\app\out\main.js"
+
+          if (-not (Test-Path -LiteralPath $source_main)) {
+              throw "找不到 main.js：$source_main"
+          }
+          
           $main_content = Get-Content -Path $source_main -Raw
 
           $new_main = "FE/resources/app/out/main.original.js"
