@@ -506,7 +506,7 @@ jobs:
           Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Filter main.js |
             Select-Object -ExpandProperty FullName
             
-          $source_main = Join-Path $env:GITHUB_WORKSPACE "FE\resources\app\out\main.js"
+          $source_main = Join-Path $env:GITHUB_WORKSPACE "FE\resources\app.asar.unpacked\out\main.js"
 
           if (-not (Test-Path -LiteralPath $source_main)) {
               throw "找不到 main.js：$source_main"
