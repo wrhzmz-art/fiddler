@@ -502,6 +502,10 @@ jobs:
 
       - name: Patch main.js to main.original.js
         run: |
+          Write-Host "查找实际的 main.js："
+          Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Filter main.js |
+            Select-Object -ExpandProperty FullName
+            
           $source_main = Join-Path $env:GITHUB_WORKSPACE "FE\resources\app\out\main.js"
 
           if (-not (Test-Path -LiteralPath $source_main)) {
