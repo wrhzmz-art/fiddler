@@ -509,7 +509,7 @@ jobs:
           
           $main_content = Get-Content -Path $source_main -Raw
 
-          $new_main = "FE/resources/app/out/main.original.js"
+          $new_main = "FE/resources/app.asar.unpacked/out/main.original.js"
 
           $source_index = "msojocs-patch/server/index.js"
           $index_content = Get-Content -Path $source_index -Raw
